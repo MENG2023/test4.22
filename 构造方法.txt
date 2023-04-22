@@ -1,0 +1,141 @@
+构造方法的特性
+1.名字必须与类名相同
+2.没有返回值,设置为void也不行
+3.创建对象时由编译器自动调用,并且在对象的生命周期内只调用一次
+4.构造方法可以重载
+public class Date{
+  public int year;
+  public int month;
+ public int day;
+
+ //无参构造方法
+ 
+ public Date() {
+    this.year = 1900;
+   this.month = 1;
+   this.day = 1;
+  }
+
+//带有三个参数的构造方法
+public  Date(int year,int month,int day) {
+    this.year = year;
+     this.month = month;
+    this.day = day;
+   }
+
+public void printDate() {
+      System.out.println(year+"-"+month+"-"+day);
+   }
+
+public static void main(String[] args) {
+   Date d = new Date();
+     d.printDate();
+  }
+}
+
+上述两个构造方法:名字相同,参数列表不同,因此构成了方法重载
+
+5.如果用户没有显示定义,编译器会生成一份默认的构造方法,生成的默认的构造方法一定是无参的
+
+public class Date{
+  public int year;
+  public int month;
+   public int day;
+  
+
+  public void printDate() {
+    System.out.println(year+"-"+month+"-"+day);
+  }
+
+public static void main(String[] args) {
+   Date d = new Date();
+     d.printDate();
+  }
+}
+上述Date类中,没有定义任何构造方法,编译器会默认生成一个不带参数的构造方法
+
+注意:一旦用户定义,编译器则不再生成
+
+public class Date{
+  public int year;
+ public int month;
+ public int day;
+
+public Date(int year,int month,int day) {
+  this.year = year;
+  this.month = month;
+  this.day = day;
+ }
+
+  
+public void printDate() {
+  System.out.println(year+"-"+month+"-"+day);
+ }
+
+public static void main(String[] args) {
+  //如果编译器会生成,则生成的构造方法一定是无参的
+  //则此处创建对象是可以通过编译的
+ //但实际情况是:编译器报错
+
+ Date d = new Date();
+ d.printDate();
+  }
+}
+
+
+6.构造方法中,可以通过this调用其它构造方法来简化代码
+   public class Date{
+   public int year;
+   public int month;
+   public int day;
+//此处可以在无参构造方法中通过this调用带三个参数的构造方法
+
+public Date(){
+ this(1900,1,1);
+//调用当前对其它的构造方法
+必须放在第一行
+只能在构造方法内部使用
+}
+
+//带三个参数的构造方法
+
+public Date(int year,int month,int day) {
+ this.year = year;
+ this.month = month;
+ this.day = day;
+  }
+}
+注意:
+this(...)必须是构造方法中的第一条语句
+
+this不能调用静态的成员方法和属性
+
+this.date :访问当前对象的成员变量
+this.func() 访问当前对象的成员方法
+this() 调用当前对象的其它构造方法
+
+
+不能形成环
+7.绝大多数情况下使用public来修饰,特殊场景下会被private修饰
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
